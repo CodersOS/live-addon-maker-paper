@@ -153,16 +153,48 @@ Section~\ref{sec:boot} talks about how the file is integrated into the live syst
 
 In order to create such files, we created a command line tool named ``Live Addon Maker".
 This tool creates the the addon files.
-In Section~\ref{sec:interface}, we talk about the interface design decisions.
+In Section~\ref{sec:requirements}, we talk about the interface design decisions.
 In Section~\ref{sec:implementation} we talk about implementation details and challenges.
 
-\subsection{Interface}
-\label{sec:interface}
+\subsection{Requirements}
+\label{sec:requirements}
 
+We isolated three different stages at which users may want to change the live system.
+These stages are reflected when creating an addon.
 
+\begin{itemize}
+  \item Startup:
+        When the system boots, a command is executed.
+        For example, this command can delete files or connect to wifi.
+  \item Persistent:
+        These commands and files are persisted in the addon file system.
+        They appear as read-only in the live system.
+        This could be an installed package or information for the user.
+  \item Volatile:
+        These keep the addon small and reduce conflict between addons.
+        These can be files used by the persistent commands to install something.
+        These files are obsolete, once the installation took place.
+        An example are source code files or temporary files.
+\end{itemize}
 
-\subsection{Implementation}
+When creating one addon, we can use all these stages.
+E.g. we can update the package list and not store this information in the addon (volatile). Then, we can install a package (persistent) and execute a script on start-up which uses the installed package.
+
+When booting the system, we also recognized, that a maximum number of addons lower than 10 is supported by the system.
+This is due to a shortage of loop devices which are required to mount \texttt{squashfs} files.
+To support more addons, we created a script to merge several addons into one.
+
+Also, user may want to deliver the live iso image with the addon built in.
+
+In the following Section~\ref{sec:interface}, we discuss how we implemented these requirements.
+
+\subsection{Interface and Implementation}
 \label{sec:implementation}
+
+The interface is a direct conclusion from Section~\ref{sec:requirements}.
+We can add files in persistent and volatile mode, execute commands in persistent, volatile mode and on start-up.
+In this section, we discuss how we implemented the desired behavior and discuss our findings.
+
 
 
 \section{Evaluation}
