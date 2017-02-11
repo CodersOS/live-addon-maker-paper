@@ -195,9 +195,24 @@ The interface is a direct conclusion from Section~\ref{sec:requirements}.
 We can add files in persistent and volatile mode, execute commands in persistent, volatile mode and on start-up.
 In this section, we discuss how we implemented the desired behavior and discuss our findings.
 
+When an addon is created for an ISO image, we need to extract the file system from this image.
+It is possible to unpack the image and using several gigabytes of space and minutes of time.
+So, we decided to mount the image and the \texttt{filesystem.squashfs} file in the iso.
+This takes almost no time and only a few kilobytes of space.
 
+Based on the mounted file system, we can execute commands in a change-root environment.
+These commands can be volatile and persistent.
+However, commands shall modify the underlying system, e.g. add packages or change settings.
+A solution to this was already provided by the \texttt{casper} script.
+The different \texttt{squashfs} files are layered by AUFS.
+We added a writable layer on top of the \texttt{filesystem.squashfs}.
+All changes by commands are stored there.
+
+When an addon is created, we select the layers of the AUFS which shall be persistent.
+These layers are squashed into an addon with the squashfs-tools.
 
 \section{Evaluation}
+
 
 
 \bibliographystyle{lnig}
