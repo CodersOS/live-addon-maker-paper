@@ -37,7 +37,7 @@
 
 % 10 pt, A4, Seitenabstände
 \LoadClass[10pt,twoside, a4paper, fleqn]{article}
-\RequirePackage[english,ngerman]{babel}
+\RequirePackage[english]{babel}
 \iflnienglish\selectlanguage{english}\def\bbl@main@language{english}\fi
 % Blocksatz durch LaTeX-Default
 
