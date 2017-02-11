@@ -214,18 +214,40 @@ These layers are squashed into an addon with the squashfs-tools.
 
 In the following section, we compare this approach to other customization approaches.
 
-\section{Evaluation}
+\section{Evaluation and Future Work}
 
 In this section, we want to compare the Live Addon Maker to existing tools and point out and evaluate the differences.
 Concluding from this, in the following Section~\ref{sec:future}, we propose a set of features which we think, can be evaluated in the future.
 
 In Section~\ref{sec:customizer}, we describe a tool which has similar functionality as the Live Addon Maker.
+While the live-addon maker creates files which can be added to the live system,
+the Customizer modifies the existing file system.
+This requires extracting the file system and uses more space.
+For the common use-cases, like adding packages, the Customizer has a set of parameters and GUI options available.
+This is not the case with the live-addon-maker.
+In future, while the use-case seems to be slightly different, the tools can combined to allow addons and file system modification.
+In order to save space in the future, the Customizer could be modified to mount the existing file system instead of extracting the content.
 
+In Section~\ref{sec:custom}, we describe the ability to create custom build iso images via a website.
+This is the lowest entry barrier, as more people are capable of using a website and following a tutorial boot from a downloaded ISO than using the command line interface.
+However, using the change-root environment, it is not possible to use docker as a build environment.
+As such, both implementations are incompatible.
+However, if we wanted to combine both approaches, we can speed up image customization from a website by storing independent modifications as addons.
+It is much faster to create an addon once and add it to the iso later than executing the commands to modify this addon.
+Furthermore, the ability to switch between persistent and nonpersistent mode allows for smaller file systems.
 
+We can see that the Live Addon Maker contributes new approaches and views to the  tool set of customizing Ubuntu live systems.
+Implemented features can be a basis for existing tools to open up to new use-cases and become more efficient.
+Until then, this software solves the need for at least one Programming Club.
 
-\section{Future Work}
-\label{sec:future}
+\section{Conclusion}
 
+In this paper, we presented a tool to create addons for Ubuntu live systems.
+While existing tools focus on modifying the whole file system, the Live Addon Maker creates small files in addition to the existing system.
+
+Using the AUFS layers makes the addon creation fast and space efficient.
+This also allows to select more fine grained which modifications are required in the resulting image.
+These insights can be used to improve existing live system customization tools.
 
 \bibliographystyle{lnig}
 \bibliography{lniguide}
