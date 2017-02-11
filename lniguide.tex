@@ -1,0 +1,169 @@
+\documentclass{lni}
+% in englisch stattdessen:
+%\documentclass[english]{lni}
+
+\IfFileExists{latin1.sty}{\usepackage{latin1}}{\usepackage{isolatin1}}
+
+\usepackage{graphicx}
+\usepackage{url}
+\usepackage{fancyhdr}
+\usepackage{listings} %if lstlistings is used
+\usepackage{changepage} %for changing topmargin on first page
+\usepackage[figurename=Abb., tablename=Tab., small]{caption}[2008/04/01]
+\renewcommand{\lstlistingname}{List.}    % Listingname heißt nun List. 
+
+%Beginn der Seitenzählung für diesen Beitrag
+\setcounter{page}{11}
+
+%Kopfzeileneinstellungen
+\pagestyle{fancy}
+\fancyhead{} % Löscht alle Kopfzeileneinstellungen
+\fancyhead[RO]{\small Nicco Kunzmann, \linebreak Lecture Notes in Informatics (LNI), Gesellschaft für Informatik, Bonn $<$2017$>$ \hspace{5pt} \thepage \hspace{0.05cm}}
+\fancyfoot{} % Löscht alle Fußzeileneinstellungen
+\renewcommand{\headrulewidth}{0.4pt} %Linie unter Kopfzeile 
+\setcounter{footnote}{0}
+
+\author{Nicco Kunzmann\footnote{Hasso-Plattner-Institut, Universität Potsdam, Heinrich-von-Kleist-Str. 24, 14482 Potsdam, Nicco.Kunzmann@student.hpi.de} 
+%\, Vorname2 Nachname2\footnote{Einrichtung/Universität, Abteilung, Anschrift, Postleitzahl Ort, emailadresse@author2} \ und weitere Autorinnen und Autoren in der gleichen Notation
+}
+\title{Teaching Programming to Kids age 3 to 18}
+\begin{document}
+\maketitle
+%Überschrift des Literaturverzeichnisses - delete this line in english
+\renewcommand{\refname}{Literaturverzeichnis}
+\setcounter{footnote}{2} %Auf Anzahl der AutorInnen setzen, damit die weitere Nummerierung der Fußnoten passt
+
+\begin{abstract}
+
+\end{abstract}
+\begin{keywords}
+\end{keywords}
+
+\section{Motivation}
+
+Students in programming clubs like CoderDojos\footnote{\url{https://coderdojo.com}} use special software to write computer programs.
+To keep the entrance barrier low, these clubs do not charge for attendance.
+As a result, the computers use Linux, preferably on USB-devices.
+An installation of Ubuntu on a USB-device boots slowly or not, see Section~\ref{sec:related}.
+Therefore, we created a tool to create files which extend the live system on the  USB-device, so called addons.
+They can be installed by copying them onto the stick.
+They may contain software, files and configuration.
+
+\section{Related Work}
+\label{sec:related}
+
+There are several ways customize a Ubuntu on a USB-device.
+In the following, we discuss the installation on the USB-device, creating custom ISO images, extending the squashfs.filesystem, and using the persistence of the live system.
+
+\subsection{The Released Live Images}
+
+We used the Live images in a programming club "CoderDojo" at the 33C3\footnote{\url{https://events.ccc.de/congress/2016/wiki/Projects:Junghackertag}}.
+They booted in below five minutes.
+However, additional software needed to be installed on every system by hand, every time the system  was rebooted.
+This is in contrast to the mindless automate all the things approach we are used to.
+
+\subsection{Installation of Ubuntu on a USB device}
+
+Ubuntu can be installed on a USB device.
+This seems to be the natural way since the live CD suggest installing it.
+We performed such an installation on a USB 2.0 device with 5MB/s writing and 10mb/s reading speed.
+Lubuntu 16.4\footnote{\url{http://cdimage.ubuntu.com/lubuntu/releases/xenial/}} did not boot to desktop. 
+Ubuntu Mate 16.4\footnote{\url{https://ubuntu-mate.org}} took 5 minutes to boot.
+Then, it was unresponsive with every click we made, was it opening the main menu or opening Firefox.
+
+We concluded, that an installation on these USB devices was too slow and frustrating to use.
+
+\subsection{Creating Custom ISO Images}
+\label{sec:custom}
+
+Since CoderDojo Potsdam\footnote{\url{http://coderdojopotsdam.github.io/}} is not the only Dojo using USB devices to boot a custom image from, we decided to create a software which should make it possible to extend live-images to any needs.
+We created CodersOS\footnote{\url{https://github.com/CodersOS/}} for the following work flow:
+
+\begin{enumerate}
+  \item Choose the software from a website\footnote{\url{https://codersos.github.io/create}}
+  \item Build the image\footnote{\url{https://github.com/CodersOS/image-creator-server}}
+  \item Download and flash the ISO file to the USB device.
+\end{enumerate}
+
+Despite implementing the process fully, some ISO images did not boot because the 
+squashed file system could not be mounted.
+It can be assumed that some Ubuntu flavors can boot this way but looking at Ubuntu Remix, Xubuntu and Meilix, we did not find a reliable way to boot them.
+
+\subsection{Live Image Persistence}
+\label{sec:pers}
+
+When an Ubuntu live ISO boots, one can pass parameters such as \texttt{PERSISTENCE}.
+Given this parameter, the live image looks for the file \texttt{casper-rw} with an ext2 file system in it.
+This file system is mounted in read-write mode\footnote{To find this behavior, unzip the file \texttt{casper/initrd.lz} and have a look at the casper shell script or preferably \url{https://help.ubuntu.com/community/LiveCD/Persistence}} on an AUFS layer above the filesystem.squashfs.
+Any change of the file system is saved to this file.
+
+When using this method, the system ``Ubuntu 16.10 Destop amd64" did not boot after installing software.
+This is not as reliable as we hoped.
+
+\subsection{Ubuntu Customization Kit}
+
+There is a variety of customization programs for Ubuntu distributions.
+We had a look at the Ubuntu Customization Kit "UCK"\footnote{\url{http://uck.sourceforge.net/}}.
+The project is discontinued, so we decided against using this as a basis for the  image customization.
+
+
+\subsection{Customizer}
+
+Customizer\footnote{\url{https://github.com/kamilion/customizer}} is a software to change existing ISO images.
+This software features a command line interface (CLI) and a graphical user interface (GUI).
+Both can be used.
+We wanted to create an automated customization over a website, see Section~\cite{sec:custom}.
+We could not understand the CLI at this time.
+Thus, we discarded the tool.
+Furthermore, this tool uses the change-root environment, which is not available in docker.
+Having gathered the knowledge of Section~\ref{sec:live}, we can understand Customizer and compare it with Live Addons.
+
+\section{Creating Live System Addons}
+\label{sec:live}
+
+
+\subsection{The Boot Process}
+\label{sec:boot}
+Live systems such as Ubuntu 16.10 amd64, use casper scripts for booting.
+This describes the boot process in shortened form:
+\begin{enumerate}
+  \item The kernel is loaded.
+        It loads the file \texttt{casper/initrd.lz}.
+        This is a compressed minimal Linux file structure with shell scripts.
+  \item The \texttt{init} script is executed.
+        It passes the boot parameters further to the \texttt{casper} script.
+  \item The \texttt{casper} script looks for all mountable files with a \texttt{.ext2}, \texttt{.squashfs} and folders with a \texttt{.dir} extension in the \texttt{casper} folder.
+        These are mounted in order of the extension and the name.
+  \item These mounted folders are used as a basis for Another Union File (AUFS) in read-only mode.
+        When a program wants to open a file in AUFS, the file is looked for in the given order in the mounted file systems.
+        The first occurrence is used.
+  \item In case persistence is enables, see Section~\ref{sec:pers}, the \texttt{casper-rw} file is included in the AUFS mount as first writable file system.
+  \item A script changes the root of the file system into the AUFS folder.
+        Then, \texttt{/sbin/init} is executed and the system boots.
+\end{enumerate}
+
+The live system is stored in the \texttt{filesystem.squashfs} file.
+As we can see, the boot process does handle a set of these files simultaneously.
+Thus, we if we create another \texttt{.squashfs} file, it is mounted and the files are accessible when the user logs in.
+
+\section{Implementation}
+
+Adding a program or files to the live image before boot can be done with a simple copy and paste of a file system file or directory into the \texttt{casper} folder.
+Section~\ref{sec:boot} talks about how the file is integrated into the live system.
+
+In order to create such files, we created a command line tool named ``Live Addon Maker".
+
+\subsection{Interface}
+
+
+
+\section{Evaluation}
+
+
+\bibliographystyle{lnig}
+\bibliography{lniguide}
+
+\end{document}
+
+
+

@@ -1,0 +1,107 @@
+\section{A Safe Peer-Learning Environment}
+
+\section{Fundamental Computer Science Concepts}
+
+\begin{itemize}
+  \item Commands
+  \item Sequence of Commands
+  \item Repetition Patterns
+  \item 
+  \item 
+\end{itemize}
+
+\section{Categorization of Skills}
+
+\begin{itemize}
+  \item Can Touch
+  \item Can Read
+  \item Can Type
+\end{itemize}
+
+
+\section{Sources of Knowledge}
+If a student grasps a concept, it is often delivered in different forms.
+Students, depending on their age and skill, can read or play through tutorials, they can teach each other or be taught. 
+In order to provide the maximum efficiency, in a system of content delivery, e.g. a collective session of programming, the students are able to choose what works best for the group.
+The organizers of such a session can frame the behavior by choosing tutorials and rules.
+E.g. in a setting where there is one mentor and thirty learners, the material can be limited to three different tutorials and a rule can be introduced that each participant must ask three other participants before asking the mentor.
+
+Mentors do not scale as much as digital content.
+Therefore, using digital or persisted content such as handouts or tutorials allows students to pursue their goals on their own and in interaction with each other. Students can learn basic concepts of Computer Science by eliminating the central role of the  teacher.
+
+\subsection{Delivering Digital Content}
+Students can learn programming with tutorials and handouts.
+However, these need to be delivered to them.
+The way of delivery can be different depending on the place and time of the session.
+We can categorize the persistence of the session content as WAN, LAN and local.
+
+\begin{itemize}
+  \item WAN - the content is available through the internet. Typical points of failure: Live-connection, bandwidth.
+  \item LAN - the content is available via Ethernet or WIFI. Typical points of failure: IP-Configuration, operating system and software do not match, taking the result home.
+  \item Local - The software is on the computer of the attendee. Typical points of failure: Differing versions of the content among participants, collaboration between computers.
+\end{itemize}
+
+We can find the WAN programming sessions in places with good internet connection like universities, libraries and company-quarters.
+We can use local and LAN content in these sessions.
+Online services such as Scratch\footnote{\url{http://scratch.mit.edu/}},
+App Inventor\footnote{\url{http://appinventor.mit.edu/}} and,
+CS-circles\footnote{\url{http://cscircles.cemc.uwaterloo.ca/}}
+allow saving the content and proceeding later, e.g. at home.
+Likely, LAN content can also be served in this setting.
+
+Settings like the CoderDojo Pesaro, Rimini, Italy or a conference, a hotel of home may not deliver the required throughput for a fully internet-based session.
+The connection may be unstable, non-existent or limited to a certain number of computers.
+In this setting, we can create local hot-spots to deliver the content.
+This setting limits the diversity of content to those install-able on a local server.
+
+In the local setting, the we can copy files to computers or have the preinstalled.
+This setting limits the diversity to the software install-able in the operating systems of the participants. This could be websites, apps and, programs. Installation may be too complex to perform by every participant or require an internet connection.
+
+As such, we can conclude, that the content of sessions can be categorized and put into relation:
+
+$WAN \supseteq LAN \supseteq Local$
+
+With this relation, we can assume LAN to be a fallback option for WAN and Local to be a fallback for LAN.
+
+\subsection{Internet Tutorials}
+
+There is a huge variety of Computer Science and programming tutorials available on the internet\footnote{\url{http://jugendprogrammiert.weebly.com}}.
+legal use of the tutorials in programming clubs requires a License granting certain rights and access policies.
+
+There are tutorials like OpenHPI\footnote{\url{https://open.hpi.de/}} which have a all rights reserved license and a back-end which can not be duplicated to a local computer. These are for use on the internet only.
+
+Also, there are tutorials like Start hardware\footnote{\url{http://starthardware.org}}.
+These have a CC-by-SA\footnote{\url{https://creativecommons.org/licenses/by-sa/4.0/}} license or other open licenses which allow distribution.
+However, they are not available for download and can legally be mirrored.
+
+Also, there a programs like the Computer Science Circles\footnote{\url{https://github.com/cemc/cscircles-wp-content}} which are interactive and can be installed.
+
+The workshop material can also be licensed to be only given away to a limited and trusted number of people. AppCamps\footnote{\url{https://teach.appcamps.de/}} give away their tutorials and handouts for free but not for public distribution.
+
+Of the tutorials available on the internet, only a subset can be used legally and possibly in the context of a LAN.
+
+\subsection{Distributing Teaching Materials In A LAN}
+
+The most obvious way to distribute contents in a LAN setting of a programming club is to use a HTTP server.
+Many tutorials are already available as websites.
+Thus, they integrate well.
+Also, HTTP can be used under Windows, Linux, Mac, Ubuntu and iOS.
+
+With the offline-material\footnote{https://github.com/cdpoffline/offline-material}, we developed a open-source offline server to use in programming clubs around the world.
+Tutorials work like plugins.
+They can be installed, activated and deactivated.
+
+
+
+\subsection{Distribution of Teaching Materials locally}
+
+When there is no WIFI or LAN connection available, we can still distribute the files via USB or already store them on the computers before the workshop.
+
+To prepare single computers for the use in the programming events, we can prepare the operating system.
+Therefore we created CodersOS\footnote{\url{https://github.com/CodersOS}}.
+it allows programming clubs to automate the customization of their computers.
+
+
+\section{Constructing the Optimal}
+
+
