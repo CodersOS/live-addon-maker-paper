@@ -7,6 +7,8 @@ You can [download the current version](https://niccokunzmann.github.io/download_
 Contribute
 ----------
 
+[![Build Status](https://travis-ci.org/CodersOS/live-addon-maker-paper.svg?branch=master)](https://travis-ci.org/CodersOS/live-addon-maker-paper)
+
 Please edit the [lniguide.tex](lniguide.tex) file and create a pull-request.
 You can add yourself as an author.
 
