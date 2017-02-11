@@ -26,7 +26,7 @@
 \author{Nicco Kunzmann\footnote{Hasso-Plattner-Institut, Universit‰t Potsdam, Heinrich-von-Kleist-Str. 24, 14482 Potsdam, Nicco.Kunzmann@student.hpi.de} 
 %\, Vorname2 Nachname2\footnote{Einrichtung/Universit‰t, Abteilung, Anschrift, Postleitzahl Ort, emailadresse@author2} \ und weitere Autorinnen und Autoren in der gleichen Notation
 }
-\title{Teaching Programming to Kids age 3 to 18}
+\title{Fine-Grained Customization of Ubuntu Live Systems}
 \begin{document}
 \maketitle
 %‹berschrift des Literaturverzeichnisses - delete this line in english
@@ -34,7 +34,11 @@
 \setcounter{footnote}{2} %Auf Anzahl der AutorInnen setzen, damit die weitere Nummerierung der Fuﬂnoten passt
 
 \begin{abstract}
-
+Existing customization tools for Ubuntu live images focus on changing the whole file system.
+In this paper, we discuss the findings from the Live Addon Maker:
+It uses less space and time to customize ISO images.
+Resulting customizations are independent, smaller and can be combined.
+This lowers the entry barrier for live system customization.
 \end{abstract}
 \begin{keywords}
 \end{keywords}
@@ -235,6 +239,10 @@ As such, both implementations are incompatible.
 However, if we wanted to combine both approaches, we can speed up image customization from a website by storing independent modifications as addons.
 It is much faster to create an addon once and add it to the iso later than executing the commands to modify this addon.
 Furthermore, the ability to switch between persistent and nonpersistent mode allows for smaller file systems.
+
+Independent addons can be combined.
+This makes it possible to customize the images by copy and pasting a set of addons.
+This is faster and more accessible than installing a customization software.
 
 We can see that the Live Addon Maker contributes new approaches and views to the  tool set of customizing Ubuntu live systems.
 Implemented features can be a basis for existing tools to open up to new use-cases and become more efficient.
