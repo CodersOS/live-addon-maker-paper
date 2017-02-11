@@ -1,0 +1,16 @@
+# see https://github.com/harshjv/travis-ci-latex-pdf/blob/master/.travis.yml
+dist: trusty
+before_install:
+- apt-get -qq update && sudo apt-get install -y --no-install-recommends texlive-fonts-recommended texlive-latex-extra texlive-fonts-extra dvipng texlive-latex-recommended
+script:
+- mkdir _build
+- pdflatex -interaction=nonstopmode -halt-on-error -output-directory . lniguide.tex
+deploy:
+  provider: releases
+  api_key:
+      secure: "Sb869s1cAU2L0D+Tak3LHfMSZgHfPEv0SfyeBnnQe/5LO2+qLbkgMuEQu1kqR1WrJhwAuw3J5+ED7clMdCYcMDfaAngAK1SzI5rUq02/tb4k5DStEbhI7bC/x5uK1heFOks+zt1SKfozjseIxKszQrgrEY+DNzRiP+oMsnMDB23QXvTYLDSMlx9VsXtJV66Xi3FLTDWrlexWUqTv+KaCwOmRWL8ABxDL0/hDj61aySVXqGszXPp8NyVzl6K56XvuryAH9NfeNSnwHnPsDwfGNWRAxvf7JqbR/KmdqOtqeoZ2eGSsWntQ7MxE3fxyF9WBAPszqitnSe4Yt6bynenBQZDf5QEHDjyIsO1phQXVaQuznOURIWqeBD+mw5I6wp1T9QvCJcuQS9aGId0zbj4+6lIroQkQ9syVRu6ZD4uovwM/rTauYmk8t7OZdK+ZMJiYNCXFqQyvkslZG1vhCRhJ92sj4Y4w2ElsC8pfcmCEEwWRTRc+93w9RBh1weqBtfCxesgznPq4iUp5h55bOsJ+gZ2P2Jna5Hkgs1MoDlBZT4T+MjkjKgL2p1uuE+TkNh/yxhOaLqm1+/TONyR2wGJCYBBdoJXWsxIcktuNLhpk0pIxFiNIkgoVz3iSIdHDmeBk+V274+H6Yp5+XUB1uBu5szX0z0Ne2sTCja2pvDhlEZU="
+  file:
+  - lniguide.pdf
+  skip_cleanup: true
+  on:
+    branch: master
