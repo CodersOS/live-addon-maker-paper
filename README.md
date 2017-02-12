@@ -3,6 +3,13 @@
 This is a paper about the [live-addon-maker](https://github.com/CodersOS/live-addon-maker).
 You can [download the current version](https://niccokunzmann.github.io/download_latest/live-addon-maker.pdf).
 
+SKILL2017
+---------
+
+This paper shall be a contribution to [SKILL2017](http://skill.informatik.uni-leipzig.de/blog/skill2017/).
+Seee the [Call for Papers](SKILL2017-CfP.pdf).
+It follows [this style guide](lniguide.pdf).
+CC-BY-SA rights must be granted, see [the rights grant](LNI-Rechtseinraeumung.pdf).
 
 Contribute
 ----------
