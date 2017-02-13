@@ -10,28 +10,28 @@
 \usepackage{listings} %if lstlistings is used
 \usepackage{changepage} %for changing topmargin on first page
 \usepackage[figurename=Abb., tablename=Tab., small]{caption}[2008/04/01]
-\renewcommand{\lstlistingname}{List.}    % Listingname heiﬂt nun List. 
+\renewcommand{\lstlistingname}{List.}    % Listingname hei√üt nun List. 
 
-%Beginn der Seitenz‰hlung f¸r diesen Beitrag
+%Beginn der Seitenz√§hlung f√ºr diesen Beitrag
 \setcounter{page}{11}
 
 %Kopfzeileneinstellungen
 \pagestyle{fancy}
-\fancyhead{} % Lˆscht alle Kopfzeileneinstellungen
-\fancyhead[RO]{\small Nicco Kunzmann, \linebreak Lecture Notes in Informatics (LNI), Gesellschaft f¸r Informatik, Bonn $<$2017$>$ \hspace{5pt} \thepage \hspace{0.05cm}}
-\fancyfoot{} % Lˆscht alle Fuﬂzeileneinstellungen
+\fancyhead{} % L√∂scht alle Kopfzeileneinstellungen
+\fancyhead[RO]{\small Nicco Kunzmann, \linebreak Lecture Notes in Informatics (LNI), Gesellschaft f√ºr Informatik, Bonn $<$2017$>$ \hspace{5pt} \thepage \hspace{0.05cm}}
+\fancyfoot{} % L√∂scht alle Fu√üzeileneinstellungen
 \renewcommand{\headrulewidth}{0.4pt} %Linie unter Kopfzeile 
 \setcounter{footnote}{0}
 
-\author{Nicco Kunzmann\footnote{Hasso-Plattner-Institut, Universit‰t Potsdam, Heinrich-von-Kleist-Str. 24, 14482 Potsdam, Nicco.Kunzmann@student.hpi.de} 
-%\, Vorname2 Nachname2\footnote{Einrichtung/Universit‰t, Abteilung, Anschrift, Postleitzahl Ort, emailadresse@author2} \ und weitere Autorinnen und Autoren in der gleichen Notation
+\author{Nicco Kunzmann\footnote{Hasso-Plattner-Institut, Universit√§t Potsdam, Heinrich-von-Kleist-Str. 24, 14482 Potsdam, Nicco.Kunzmann@student.hpi.de} 
+%\, Vorname2 Nachname2\footnote{Einrichtung/Universit√§t, Abteilung, Anschrift, Postleitzahl Ort, emailadresse@author2} \ und weitere Autorinnen und Autoren in der gleichen Notation
 }
 \title{Fine-Grained Customization of Ubuntu Live Systems}
 \begin{document}
 \maketitle
-%‹berschrift des Literaturverzeichnisses - delete this line in english
+%√úberschrift des Literaturverzeichnisses - delete this line in english
 \renewcommand{\refname}{Literaturverzeichnis}
-\setcounter{footnote}{2} %Auf Anzahl der AutorInnen setzen, damit die weitere Nummerierung der Fuﬂnoten passt
+\setcounter{footnote}{2} %Auf Anzahl der AutorInnen setzen, damit die weitere Nummerierung der Fu√ünoten passt
 
 \begin{abstract}
 Existing customization tools for Ubuntu live images focus on changing the whole file system.
@@ -47,7 +47,10 @@ This lowers the entry barrier for live system customization.
 
 Students in programming clubs like CoderDojos\footnote{\url{https://coderdojo.com}} use special software to write computer programs.
 To keep the entrance barrier low, these clubs do not charge for attendance.
-As a result, the computers use Linux, preferably on USB-devices.
+Furthermore, for children and adolescents who do not have a laptop of their own, we lend out laptops. 
+To keep these systems lean, they do not have a hard drive.
+Hence, these systems always boot live systems.
+As a result, the computers use a live Linux system, preferably on USB-devices.
 An installation of Ubuntu on a USB-device boots slowly or not, see Section~\ref{sec:related}.
 Therefore, we created a tool to create files which extend the live system on the  USB-device, so called addons.
 They can be installed by copying them onto the stick.
