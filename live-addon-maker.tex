@@ -183,15 +183,20 @@ These stages are reflected when creating an addon.
         An example are source code files or temporary files.
 \end{itemize}
 
+% HÄÄÄÄ? Warum will ich das zu den zeiten ändern? Ich versteh den Use-Case nicht den du vor Augen hast glaube ich. Was will ich denn eigentlich ändern? Also was will ich den tun? Könntest du hier noch merh erklären, wie du zu diesen gedanken kommst? Das fällt so vom Himmel, da komm ich nicht richtig mit. Was heißt über ahupt "may want to change the live system"? Was heißt denn hier change? Und was ist der Zustand von dem ausgegangen wird?
+%Ist Volatile sowas wie, während des Bauen des Images oder so?
+
 When creating one addon, we can use all these stages.
 E.g. we can update the package list and not store this information in the addon (volatile). Then, we can install a package (persistent) and execute a script on start-up which uses the installed package.
 
 When booting the system, we also recognized, that a maximum number of addons lower than 10 is supported by the system.
 This is due to a shortage of loop devices which are required to mount \texttt{squashfs} files.
 To support more addons, we created a script to merge several addons into one.
+% Ist das so einfach möglich? Warum ist das so möglich? Erklären bitte. Außer es ist unwichtig...
 
 Also, user may want to deliver the live iso image with the addon built in.
 Thus, there should be a way to add addons to existing ISO images.
+% Oh, also gibt es einen anderen Weg als Addons fest einzubauen? Ich dachte das geht nur so, dass man die ins ISO tut? Warum steht da ein Thus? Der eine Satz ist doch keine Folgerung aus dem anderen? Die haben doch nix miteinander zu tun, oder habe ich da etwas noch nciht verstanden?
 
 In the following Section~\ref{sec:implementation}, we discuss how we implemented these requirements.
 
@@ -208,10 +213,10 @@ So, we decided to mount the image and the \texttt{filesystem.squashfs} file in t
 This takes almost no time and only a few kilobytes of space.
 
 Based on the mounted file system, we can execute commands in a change-root environment.
-These commands can be volatile and persistent.
+These commands can be volatile and persistent. % aber nciht gleichzeitig, oder? Vllt. eher or statt and?
 However, commands shall modify the underlying system, e.g. add packages or change settings.
 A solution to this was already provided by the \texttt{casper} script.
-The different \texttt{squashfs} files are layered by AUFS.
+The different \texttt{squashfs} files are layered by AUFS. %AUFS sollte in Related Work vllt. ein bisschen erklärt werden.
 We added a writable layer on top of the \texttt{filesystem.squashfs}.
 All changes by commands are stored there.
 
@@ -231,23 +236,23 @@ the Customizer modifies the existing file system.
 This requires extracting the file system and uses more space.
 For the common use-cases, like adding packages, the Customizer has a set of parameters and GUI options available.
 This is not the case with the live-addon-maker.
-In future, while the use-case seems to be slightly different, the tools can combined to allow addons and file system modification.
+In future, while the use-case seems to be slightly different, the tools can be combined to allow addons and file system modification.
 In order to save space in the future, the Customizer could be modified to mount the existing file system instead of extracting the content.
 
-In Section~\ref{sec:custom}, we describe the ability to create custom build iso images via a website.
+In Section~\ref{sec:custom}, we describe the ability to create custom build iso images via a website. %Dass das mit ner Website geht wurde nicht richtig beschrieben. Das ist nicht rausgekommen für mich. Vllt nochmal mehr beschreiben?
 This is the lowest entry barrier, as more people are capable of using a website and following a tutorial boot from a downloaded ISO than using the command line interface.
-However, using the change-root environment, it is not possible to use docker as a build environment.
-As such, both implementations are incompatible.
+However, using the change-root environment, it is not possible to use docker as a build environment. %Hier wieder docker, aber ansonsten wurde es nur in RW kurz erwähnt. Warum ist docker für das Projekt wichtig?
+As such, both implementations are incompatible. % welche beiden meinst du? Meinst du CodersOS und deinen addon maker? Vllt noch erwähnen, warum man die zusammen verwenden wollen würde.
 However, if we wanted to combine both approaches, we can speed up image customization from a website by storing independent modifications as addons.
-It is much faster to create an addon once and add it to the iso later than executing the commands to modify this addon.
+It is much faster to create an addon once and add it to the iso later than executing the commands to modify this addon. % HÄÄ? Versteh nicht. Klingt für mich wie Äpfel mit Steinen verleichen oder so... Addon erschnellen und zu iso später hinzufügen ist schneller als Kommandos zum Ändern des addons auszuführen? Warum ist das wichtig? Warum wird das so erwähnt?
 Furthermore, the ability to switch between persistent and nonpersistent mode allows for smaller file systems.
 
-Independent addons can be combined.
+Independent addons can be combined. % Wann sind addons unabhängig voneinander? Was ist mit hierarchichen abhängigkeiten, also eins baut auf dem anderen auf? Oder ist das für das zusammenfügen von addons damit mehr gemacht werden können relevant?
 This makes it possible to customize the images by copy and pasting a set of addons.
 This is faster and more accessible than installing a customization software.
 
 We can see that the Live Addon Maker contributes new approaches and views to the  tool set of customizing Ubuntu live systems.
-Implemented features can be a basis for existing tools to open up to new use-cases and become more efficient.
+Implemented features can be a basis for existing tools to open up to new use-cases and become more efficient. % Wie? Das ist doch grad nur holes blabla?
 Until then, this software solves the need for at least one Programming Club.
 
 \section{Conclusion}
