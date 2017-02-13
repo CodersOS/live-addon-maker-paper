@@ -47,10 +47,7 @@ This lowers the entry barrier for live system customization.
 
 Students in programming clubs like CoderDojos\footnote{\url{https://coderdojo.com}} use special software to write computer programs.
 To keep the entrance barrier low, these clubs do not charge for attendance.
-Furthermore, for children and adolescents who do not have a laptop of their own, we lend out laptops. 
-To keep these systems lean, they do not have a hard drive.
-Hence, these systems always boot live systems.
-As a result, the computers use a live Linux system, preferably on USB-devices.
+As a result, the computers use Linux, preferably on USB-devices.
 An installation of Ubuntu on a USB-device boots slowly or not, see Section~\ref{sec:related}.
 Therefore, we created a tool to create files which extend the live system on the  USB-device, so called addons.
 They can be installed by copying them onto the stick.
@@ -59,31 +56,31 @@ They may contain software, files and configuration.
 \section{Related Work}
 \label{sec:related}
 
-There are several ways customize a Ubuntu on a USB-device.
+There are several ways to customize a Ubuntu on a USB-device.
 In the following, we discuss the installation on the USB-device, creating custom ISO images, extending the squashfs.filesystem, and using the persistence of the live system.
 
 \subsection{The Released Live Images}
 
-We used the Live images in a programming club "CoderDojo" at the 33C3\footnote{\url{https://events.ccc.de/congress/2016/wiki/Projects:Junghackertag}}.
+We first used the Live images for the programming event for Children "CoderDojo" at the 33C3\footnote{\url{https://events.ccc.de/congress/2016/wiki/Projects:Junghackertag}}.
 They booted in below five minutes.
 However, additional software needed to be installed on every system by hand, every time the system  was rebooted.
-This is in contrast to the mindless automate all the things approach we are used to.
+This is in contrast to the idea of having a working system on a USB-drive, that is fully fuctional for our purposes once it is booted.
 
 \subsection{Installation of Ubuntu on a USB device}
 
-Ubuntu can be installed on a USB device.
-This seems to be the natural way since the live CD suggest installing it.
+Predefined Ubuntu images can be installed on a USB device.
 We performed such an installation on a USB 2.0 device with 5MB/s writing and 10mb/s reading speed.
 Lubuntu 16.4\footnote{\url{http://cdimage.ubuntu.com/lubuntu/releases/xenial/}} did not boot to desktop. 
 Ubuntu Mate 16.4\footnote{\url{https://ubuntu-mate.org}} took 5 minutes to boot.
-Then, it was unresponsive with every click we made, was it opening the main menu or opening Firefox.
+Then, it was unresponsive with every click we made, regardless of the specific action.
 
 We concluded, that an installation on these USB devices was too slow and frustrating to use.
 
 \subsection{Creating Custom ISO Images}
 \label{sec:custom}
 
-Since CoderDojo Potsdam\footnote{\url{http://coderdojopotsdam.github.io/}} is not the only Dojo using USB devices to boot a custom image from, we decided to create a software which should make it possible to extend live-images to any needs.
+Since CoderDojo Potsdam\footnote{\url{http://coderdojopotsdam.github.io/}} is not the only Dojo using USB devices to boot a custom image from, we decided to create a software which should make it possible to extend live-images to any needs. 
+Since everyone might have different requirements for the installed software on the system, we allow users to choos the software.
 We created CodersOS\footnote{\url{https://github.com/CodersOS/}} for the following work flow:
 
 \begin{enumerate}
@@ -99,13 +96,14 @@ It can be assumed that some Ubuntu flavors can boot this way but looking at Ubun
 \subsection{Live Image Persistence}
 \label{sec:pers}
 
+When working on a live system, saving the work that was done or persisting changes that were made through the installation of new software, is complicated or impossible.
 When an Ubuntu live ISO boots, one can pass parameters such as \texttt{PERSISTENCE}.
-Given this parameter, the live image looks for the file \texttt{casper-rw} with an ext2 file system in it.
+If this parameter is passed, the live image looks for the file \texttt{casper-rw} with an ext2 file system in it.
 This file system is mounted in read-write mode\footnote{To find this behavior, unzip the file \texttt{casper/initrd.lz} and have a look at the casper shell script or preferably \url{https://help.ubuntu.com/community/LiveCD/Persistence}} on an AUFS layer above the filesystem.squashfs.
 Any change of the file system is saved to this file.
 
-When using this method, the system ``Ubuntu 16.10 Destop amd64" did not boot after installing software.
-This is not as reliable as we hoped.
+When we tested this method we found out, that the system ``Ubuntu 16.10 Destop amd64" did not boot after installing new software and saving changes in the persistence file.
+This approach proved to be not as reliable as we hoped.
 
 \subsection{Ubuntu Customization Kit}
 
